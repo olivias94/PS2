@@ -46,9 +46,15 @@ public class MyInteger {
 			/*this will be checked for if no primes are found (it will = 2 if 
 			 * the if statement inside the while loop returns false, meaning that a non-one
 			 * and non-self factor was found)
-			*/			
+			*/	
+			
+			int numberIsLessThan2Counter = 1;
+			//This counter will be changed to 2 if the number entered is less than
+			//2, because numbers less than 2 cannot be prime
+			
 			if (this.value < 2){
 				isPrimeCounter = this.value; //while loop conditional
+				numberIsLessThan2Counter = 2;
 				return false;
 				//because negative numbers, 1, and 0 cannot be prime
 			}
@@ -65,8 +71,11 @@ public class MyInteger {
 					continue;
 				}
 			}
-				if (isPrimeCounter == this.value && isNotPrimeCounter == 1){
+				if (isPrimeCounter == this.value && isNotPrimeCounter == 1 && numberIsLessThan2Counter == 1){
 					return true;
+				}
+				else{
+					return false;
 					//this will return true if isNotPrimeCounter has not been changed in the first
 					//if statement, meaning that the this.value has been found to be prime
 				
@@ -77,18 +86,18 @@ public class MyInteger {
 		
 	//the following 3 static methods use MyInteger.value 
 		
-		public static boolean isEven(MyInteger value1){
-			if (value1.value % 2 == 0){
+		public static boolean isEven(MyInteger integer1){
+			if (integer1.value % 2 == 0){
 				return true;}
 			else{
 				return false;}
 		}
 
 		public static boolean isOdd(MyInteger integer1){
-			if (integer1.value % 2 != 0){
-				return true;}
-			else{
+			if (integer1.value % 2 == 0){
 				return false;}
+			else{
+				return true;}
 		}
 
 		public static boolean isPrime(MyInteger integer1){
@@ -102,8 +111,14 @@ public class MyInteger {
 			 * the if statement inside the while loop returns false, meaning that a non-one
 			 * and non-self factor was found)
 			*/			
+			
+			int numberIsLessThan2Counter = 1;
+			//This counter will be changed to 2 if the number entered is less than
+			//2, because numbers less than 2 cannot be prime
+			
 			if (integer1.value < 2){
 				isPrimeCounter = integer1.value; //while loop conditional
+				numberIsLessThan2Counter = 2;
 				return false;
 				//because negative numbers, 1, and 0 cannot be prime
 			}
@@ -112,7 +127,7 @@ public class MyInteger {
 				if (integer1.value % isPrimeCounter == 0){
 					isPrimeCounter = integer1.value; //while loop conditional, will exit the loop
 					isNotPrimeCounter = 2;
-					//this change is to signify that this.value is not prime
+					//this change is to signify that integer1.value is not prime
 					return false;	
 				}
 				else{
@@ -120,8 +135,11 @@ public class MyInteger {
 					continue;
 				}
 			}
-				if (isPrimeCounter == integer1.value && isNotPrimeCounter == 1){
+				if (isPrimeCounter == integer1.value && isNotPrimeCounter == 1 && numberIsLessThan2Counter == 1){
 					return true;
+				}
+				else{
+					return false;	
 					//this will return true if isNotPrimeCounter has not been changed in the first
 					//if statement, meaning that the this.value has been found to be prime
 				
@@ -139,10 +157,12 @@ public class MyInteger {
 		}
 		
 		public static boolean isOdd(int staticvalue){
-			if (staticvalue % 2 != 0){
-				return true;}
+			if (staticvalue % 2 == 0){
+				return false; 
+				}
 			else{
-				return false;}
+				return true;
+				}
 		}
 		
 		public static boolean isPrime(int staticvalue){
@@ -156,8 +176,14 @@ public class MyInteger {
 			 * the if statement inside the while loop returns false, meaning that a non-one
 			 * and non-self factor was found)
 			*/
+			
+			int numberIsLessThan2Counter = 1;
+			//This counter will be changed to 2 if the number entered is less than
+			//2, because numbers less than 2 cannot be prime
+			
 			if (staticvalue < 2){
 				isPrimeCounter = staticvalue; //while loop conditional
+				numberIsLessThan2Counter = 2;
 				return false;
 				//because negative numbers, 1, and 0 cannot be prime
 			}
@@ -166,7 +192,7 @@ public class MyInteger {
 				if (staticvalue % isPrimeCounter == 0){
 					isPrimeCounter = staticvalue; //while loop conditional, will exit the loop
 					isNotPrimeCounter = 2;
-					//this change is to signify that this.value is not prime
+					//this change is to signify that staticvalue is not prime
 					return false;	
 				}
 				else{
@@ -174,14 +200,19 @@ public class MyInteger {
 					continue;
 				}
 			}
-				if (isPrimeCounter == staticvalue && isNotPrimeCounter == 1){
+				if (isPrimeCounter == staticvalue && isNotPrimeCounter == 1 && numberIsLessThan2Counter == 1){
 					return true;
+				}
+					else{
+						return false;
+					
+					}
 					//this will return true if isNotPrimeCounter has not been changed in the first
 					//if statement, meaning that the this.value has been found to be prime
 				
 				}
 			
-		}
+		
 
 		//The following 2 nonstatic methods check if the specified value is equal to the object value
 		
@@ -232,7 +263,7 @@ public class MyInteger {
 			return parseInt(str);
 			}
 			else{
-				System.out.print("The entered character array contains nonnumerical characters.  parseInt(char[]) cannot run.  A value of -1 will be returned by the method.");
+				System.out.println("The entered character array contains nonnumerical characters.  parseInt(char[]) cannot run.  A value of -1 will be returned by the method.");
 				return (-1);
 			}
 		}
@@ -249,16 +280,18 @@ public class MyInteger {
 			//int value that will be returned
 			int StringLength = StringToInt.length();
 			
-			for (int q = 0 ; q = StringLength ; q++){//goes through each char in the string
+			for (int q = 0 ; q <= (StringLength - 1) ; q++){//goes through each char in the string
 				//and turns it to an integer, which is multiplied by 10 to the power of (StringLength - q)
 				char currentCharacter = StringToInt.charAt(q);
 				int currentInteger = Character.getNumericValue(currentCharacter);
+				//System.out.println(currentInteger);
 				//multiplying the current integer by a power of 10 to the power of (StringLength - q)
-				int currentIntegerTenPower = (currentInteger * Math.pow(10.0, (StringLength- q)));
+				int currentIntegerTenPower = (int) (currentInteger * Math.pow(10.0, (StringLength- (q + 1))));
 				charIntToFinal = charIntToFinal + currentIntegerTenPower;
 				
 				}
 			return charIntToFinal;
+			
 		
 		}
 		
